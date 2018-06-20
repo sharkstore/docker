@@ -1,0 +1,39 @@
+version: "3"
+services:
+    ms:
+        build: ./master-server
+        ports:
+            - "8887:8887"
+            - "18887:18887"
+        volumes:
+            - "$HOME/work/sharkstore/docker/deploy:/deploy"
+            - "$HOME/work/sharkstore/docker/logs:/export/Logs"
+        networks:
+            net:
+                ipv4_address: 192.168.66.100
+
+    ds:
+        build: ./data-server
+        volumes:
+            - "$HOME/work/sharkstore/docker/deploy:/deploy"
+        cap_add:
+            - SYS_PTRACE
+        networks:
+            net:
+
+    gw:
+        build: ./gateway-server
+        ports:
+            - "6060:6060"
+        volumes:
+            - "$HOME/work/sharkstore/docker/deploy:/deploy"
+            - "$HOME/work/sharkstore/docker/logs:/export/Logs"
+        networks:
+            net:
+
+networks:
+  net:
+      ipam:
+          driver: default
+          config:
+            - subnet: 192.168.66.0/24

@@ -1,0 +1,40 @@
+http-port = 8080
+lock-port = 8090
+mysql-port = 6060
+max-clients = 10000
+max-record-limit = 10000
+user = "test"
+password = "123456"
+charset = "utf8"
+
+
+[performance]
+#proxy concurrency number
+max-work-num = 100
+#task queue size
+max-task-queue-len = 10000
+#keep connect size for each ds
+grpc-pool-size = 3
+# 128 KB
+grpc-win-size = 131072
+#be identified to 'slow command' when time consuming is greater than the value, unit: millisecond
+slow-insert = "20ms"
+slow-select = "100ms"
+slow-delete = "20ms"
+
+[cluster]
+id = 1
+address = ["192.168.66.100:18887"]
+
+
+[log]
+dir = "/export/Logs/gateway-server"
+module = "gateway"
+level = "debug"
+
+
+[metric]
+# metric client push interval, set "0s" to disable metric.
+interval = "15s"
+#receive metric server address
+address = "127.0.165.52:8887"
