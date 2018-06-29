@@ -10,6 +10,6 @@ VOLUME /export/Logs
 RUN mkdir -p /export/Logs/master-server
 
 RUN mkdir -p /deploy
-VOLUME /deloy
+VOLUME /deploy
 
 CMD ["/deploy/bin/master-server", "-config", "config.toml"]
